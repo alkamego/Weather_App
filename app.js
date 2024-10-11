@@ -1,36 +1,36 @@
-// Wait until the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
-
     const locationBtn = document.getElementById('btn-get-location');
     const locationStatus = document.getElementById('location-status');
     const weatherSection = document.getElementById('weather-section');
     const temperatureDisplay = document.getElementById('temperature');
     const conditionDisplay = document.getElementById('condition');
 
-    // Event Listener for the 'Get Location' button
+    // Event listener for the button to get the user's location
     locationBtn.addEventListener('click', () => {
         if (navigator.geolocation) {
             locationStatus.textContent = 'Locating…';
-            navigator.geolocation.getCurrentPosition(fetchWeatherData, handleLocationError);
+            navigator.geolocation.getCurrentPosition(getWeatherData, handleLocationError);
         } else {
             locationStatus.textContent = 'Geolocation is not supported by your browser.';
         }
     });
 
     /**
-     * Fetch weather data based on the user's location
-     * @param {Object} position - Geolocation position object
+     * Fetch weather data based on the user's location using a weather API
+     * @param {Object} position - The position object containing coordinates
      */
-    function fetchWeatherData(position) {
+    function getWeatherData(position) {
         const { latitude, longitude } = position.coords;
-        const apiKey = 'YOUR_API_KEY'; // Replace with your OpenWeatherMap API key
+        const apiKey = 'YOUR_API_KEY'; // Add your OpenWeatherMap API key here
         const weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
 
         locationStatus.textContent = `Latitude: ${latitude}, Longitude: ${longitude}`;
 
         fetch(weatherApiUrl)
             .then(response => {
-                if (!response.ok) throw new Error('Failed to fetch weather data');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch weather data');
+                }
                 return response.json();
             })
             .then(data => {
@@ -38,26 +38,26 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .catch(error => {
                 locationStatus.textContent = 'Unable to retrieve weather data at the moment.';
-                console.error('Error:', error);
+                console.error('Error fetching weather data:', error);
             });
     }
 
     /**
-     * Display weather data in the UI
-     * @param {Object} data - Weather data from API
+     * Display the weather information in the UI
+     * @param {Object} data - The weather data retrieved from the API
      */
     function displayWeatherData(data) {
         const { temp } = data.main;
         const { description } = data.weather[0];
 
-        weatherSection.classList.remove('hidden'); // Show weather section
+        weatherSection.classList.remove('hidden');
         temperatureDisplay.textContent = `${temp}°C`;
-        conditionDisplay.textContent = description.charAt(0).toUpperCase() + description.slice(1);
+        conditionDisplay.textContent = capitalizeFirstLetter(description);
     }
 
     /**
-     * Handle geolocation errors
-     * @param {Object} error - Geolocation error object
+     * Handle errors that occur during geolocation retrieval
+     * @param {Object} error - The error object returned by the geolocation API
      */
     function handleLocationError(error) {
         switch (error.code) {
@@ -74,5 +74,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 locationStatus.textContent = 'An unknown error occurred.';
                 break;
         }
+    }
+
+    /**
+     * Capitalize the first letter of a string
+     * @param {string} str - The string to capitalize
+     * @return {string} - The capitalized string
+     */
+    function capitalizeFirstLetter(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
     }
 });
