@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detailed Weather</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/variables.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <style></style>
+</head>
+<body>
+    <div class="container py-4">
+        <!-- Info Card -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <a href="index.html" class="btn btn-sm btn-outline-primary mb-3">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3 class="city-name mb-0">Warsaw</h3>
+                    <div class="current-temp h2 mb-0">2°C</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Hourly Forecast -->
+            <div class="col-12 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Hourly Forecast</h5>
+                        <div class="hourly-forecast-container d-flex overflow-auto py-2">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Information -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Detailed Information</h5>
+                        <div class="details-grid">
+                            <div class="detail-item">
+                                <i class="fas fa-temperature-high"></i>
+                                <span>Feels Like</span>
+                                <strong class="feels-like">26°C</strong>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-wind"></i>
+                                <span>Wind</span>
+                                <strong class="wind-speed">12 km/h</strong>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-tint"></i>
+                                <span>Humidity</span>
+                                <strong class="humidity">65%</strong>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-compress-arrows-alt"></i>
+                                <span>Pressure</span>
+                                <strong class="pressure">1015 hPa</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sun Information -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Sun Information</h5>
+                        <div class="sun-info">
+                            <div class="sunrise">
+                                <i class="fas fa-sunrise fa-2x"></i>
+                                <div>
+                                    <small>Sunrise</small>
+                                    <strong class="sunrise-time">06:23</strong>
+                                </div>
+                            </div>
+                            <div class="sunset">
+                                <i class="fas fa-sunset fa-2x"></i>
+                                <div>
+                                    <small>Sunset</small>
+                                    <strong class="sunset-time">19:45</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/details.js" type="module"></script>
+</body>
+</html>
